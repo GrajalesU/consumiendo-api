@@ -5,7 +5,7 @@ import './App.css'
 function App() {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(undefined)
   const [totalPages, setTotalPages] = useState(undefined)
   const [loading, setLoading] = useState(false)
 
@@ -19,6 +19,7 @@ function App() {
     fetch("https://api.mercadolibre.com/sites/MCO/search?q="+query).then(res => res.json()).then(data => {
       setResults(data.results)
       setTotalPages(data.paging.limit)
+      setPage(0)
       setLoading(false)
     })
   }
@@ -35,6 +36,7 @@ function App() {
   return (
     <div className="App">
       <div className="Searcher">
+      <p>Juan Manuel Grajales</p>
       <input type="text" placeholder='Buscar elemento en mercadolibre CO' value={query} onChange={(event)=>{
         setQuery(event.target.value)
       }}/>
