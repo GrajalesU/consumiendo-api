@@ -42,9 +42,11 @@ function App() {
       </div>
       {    totalPages &&  
       <div className="Paginator">
-        <button type="button" onClick={()=>{handlePage(page-1)}}>Anterior</button>
-        <p>{page}</p>
-        <button type="button" onClick={()=>{handlePage(page+1)}}>Siguiente</button>
+        {page > 0 && 
+          <button type="button" onClick={()=>{handlePage(page-1)}}>Anterior</button>}
+          <p>{page}</p>
+        {page < totalPages &&
+          <button type="button" onClick={()=>{handlePage(page+1)}}>Siguiente</button>}
       </div>}
       {loading ? 
       <p>Cargando ...</p> :
