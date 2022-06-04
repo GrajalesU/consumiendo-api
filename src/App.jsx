@@ -5,17 +5,30 @@ import './App.css'
 function App() {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
+  const [page, setPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(undefined)
+  const [loading, setLoading] = useState(false)
 
-  const handleSearch = (e) => {
+  const handleSearch = () => {
     if(query === '') {
       setResults([])
       alert("No has escrito nada en el buscador")
       return
     }
-
+    setLoading(true)
     fetch("https://api.mercadolibre.com/sites/MCO/search?q="+query).then(res => res.json()).then(data => {
-      console.log(data.results)
       setResults(data.results)
+      setTotalPages(data.paging.limit)
+      setLoading(false)
+    })
+  }
+
+  const handlePage = (page) => {
+    setPage(page)
+    setLoading(true)
+    fetch("https://api.mercadolibre.com/sites/MCO/search?q="+query+"&offset="+page).then(res => res.json()).then(data => {
+      setResults(data.results)
+      setLoading(false)
     })
   }
 
@@ -27,6 +40,14 @@ function App() {
       }}/>
       <button type="button" onClick={handleSearch}>buscar</button>
       </div>
+      {    totalPages &&  
+      <div className="Paginator">
+        <button type="button" onClick={()=>{handlePage(page-1)}}>Anterior</button>
+        <p>{page}</p>
+        <button type="button" onClick={()=>{handlePage(page+1)}}>Siguiente</button>
+      </div>}
+      {loading ? 
+      <p>Cargando ...</p> :
       <div className="Results">
         {results.map(result => (
           <div className='Card' key={result.id}>
@@ -37,7 +58,8 @@ function App() {
               <a href={result.permalink}>Ver producto</a>
             </div>
           </div>))}
-        </div>
+      </div>}
+      
     </div>
   )
 }
