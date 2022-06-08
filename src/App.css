@@ -1,42 +1,212 @@
-.App {
+@font-face {font-family: "Harabara Mais Demo";
+  src: url("Fonts/68def64c055416b1728559ff8d43ba0a.eot"); /* IE9*/
+  src: url("Fonts/68def64c055416b1728559ff8d43ba0a.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("Fonts/68def64c055416b1728559ff8d43ba0a.woff2") format("woff2"), /* chrome、firefox */
+  url("Fonts/68def64c055416b1728559ff8d43ba0a.woff") format("woff"), /* chrome、firefox */
+  url("Fonts/68def64c055416b1728559ff8d43ba0a.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url("Fonts/68def64c055416b1728559ff8d43ba0a.svg#Harabara Mais Demo") format("svg"); /* iOS 4.1- */
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.App{
+  background-color: #EDEDED;
+}
+
+main{
+  min-height: calc(100vh - 100px);
+}
+
+.Results {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Results .Card {
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+  border-radius: 5%;
+  border-radius: 5px;
+  /* background-color: #fafafa; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: hidden;
+}
+
+img {
+  width:100%;
+  height:250px;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+
+}
+
+.Searcher {
+  display: flex;
+  max-width: 1200px;
+  height: 50px;
+  margin: 0 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 0;
+  padding: 0;
+}
+
+header {
+  width: 100%;
+  background-color: #fff159;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Searcher p {
+  padding-right:20px;
+  font-size: 16px;
+  color: #2D3779;
+  letter-spacing: 0;
+  font-weight: 600;
+  font-family: 'Harabara Mais Demo';
+  position: absolute;
+  left: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.searchBar {
+  background: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 35%;
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.searchBar input {
+  width: 85%;
+  margin: 0;
+  border: none;
+  padding: 8px 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
+.App{
+  width: 100vw;
+  text-align: center;
+}
+
+.searchBar input:focus {
+  outline: none;
+}
+
+.searchBar button {
+  width: 15%;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 5px;
+  border-left: #fafafa 2px solid;
+  cursor: pointer;
+}
+
+
+.Paginator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.Paginator p {
+  margin: 10px;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.Paginator b{
+  font-weight: 500;
+  font-size: 1.2em;
+  border-radius: 3px;
+  background: #E4E4E4;
+  padding: 0 5px;
+}
+
+.Paginator button{
+  color: #5783FA;
+  border: none;
+  font-size: 1rem;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.Paginator button:hover{
+  background: #E4E4E4;
+}
+
+
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+.loader {
+  margin: 60px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-left: 1.1em solid #fff159;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
-  to {
+  100% {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
-
-button {
-  font-size: calc(10px + 2vmin);
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
